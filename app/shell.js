@@ -1,13 +1,26 @@
-
 define(function (require) {
-	
-	var app = require('durandal/app');
-	var ko = require('knockout');
+
+	var internalRouter = require('plugins/router');
 
 	return {
-		name: ko.observable(),
-		sayHello: function() {
-			app.showMessage('Testing: ' + this.name() + '.', 'Greetings?');
+		router: internalRouter,
+		activate: function()
+		{
+			internalRouter.map([
+				{
+					route: '',
+					title: 'Home',
+					moduleId: 'home',
+					nav: true
+				},
+				{
+					route: 'rainier',
+					title: 'Mount Rainier',
+					moduleId: 'rainier',
+					nav: true
+				}]).buildNavigationModel();
+
+			return internalRouter.activate();
 		}
 	};
 
